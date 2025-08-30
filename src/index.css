@@ -1,8 +1,147 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100&display=swap");
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-@theme {
-  --font-sans: "Inter", "sans-serif";
+@font-face {
+  font-family: 'PPTelegraf';
+  src: url('/font/PPTelegraf-Ultralight.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
 }
+
+@font-face {
+  font-family: 'PPTelegraf';
+  src: url('/font/PPTelegraf-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PPTelegraf';
+  src: url('/font/PPTelegraf-Ultrabold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+*{
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.launchlab-text {
+  color: #000 !important;
+}
+
+.launchlab-text * {
+  color: #000 !important;
+}
+
+body{
+  background-color: #000;
+}
+
+.telegraf{
+  font-family: 'PPTelegraf', sans-serif;
+}
+
+/* Hiding class, making content visible only to screen readers but not visually */
+/* "sr" meaning "screen-reader" */
+/* https://css-tricks.com/inclusively-hidden/ */
+.sr-only:not(:focus):not(:active) {
+clip: rect(0 0 0 0); 
+clip-path: inset(50%);
+height: 1px;
+overflow: hidden;
+position: absolute;
+white-space: nowrap; 
+width: 1px;
+}
+
+.animate-me {
+color: #dfdcff;
+box-sizing: border-box;
+width: 100%;
+text-align: center;
+perspective: 500px;
+}
+
+.noise-overlay {
+position: fixed;
+left: 0;
+top: 0;
+width: 100vw;
+height: 100vh;
+pointer-events: none;
+}
+
+.cardContainer{
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+position: sticky;
+top: 0px;
+.card{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: -25%;
+  height: 500px;
+  width: 1000px;
+  border-radius: 25px;
+  padding:50px;
+  transform-origin: top;
+  h2{
+    text-align: center;
+    margin: 0px;
+    font-size: 28px;
+  }
+  .body{
+    display: flex;
+    height: 100%;
+    margin-top: 50px;
+    gap: 50px;
+
+    .description{
+      width: 40%;
+      position: relative;
+      top: 10%;
+      p{
+        font-size: 16px;
+        &::first-letter{
+          font-size: 28px;
+          font-family: 'Title';
+        }
+      }
+      span{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        a{
+          font-size: 12px;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .imageContainer{
+      position: relative;
+      width: 60%;
+      height: 100%;
+      border-radius: 25px;
+      overflow: hidden;
+      .inner{
+        width: 100%;
+        height: 100%;
+      }
+      img{
+        object-fit: cover;
+      }
+    }
+  }
+}
+}
+
 
 #root {
   width: 100vw;

@@ -1,90 +1,36 @@
-import { Canvas } from "@react-three/fiber";
-import { Suspense, useCallback, useState } from "react";
-import * as THREE from "three/webgpu";
-import { Experience } from "./components/Experience";
-import { PostProcessing } from "./components/PostProcessing";
-
+import { useRef } from "react";
+import useLenis from "./hooks/useLenis";
+import Noise from "./components/UiComponents/Noise";
+import Crosshair from "./components/UiComponents/CrossHair";
+import GlobalIcons from "./components/UiComponents/globalIcons";
+import SparkCursor from "./components/UiComponents/SparkCursor";
+import Details from "./components/Pages/Home/Details";
+import LaunchLab from "./components/Pages/Home/LaunchLab";
+import StackCards from "./components/Pages/Home/StackCards";
+import LandingPage from "./components/Pages/Home/LandingPage";
+import GlobalScene from "./components/GlobalScene";
 function App() {
-  const [frameloop, setFrameloop] = useState("never");
-  const models = ["Box", "Sphere", "Torus", "Cone"];
-  const [modelIndex, setModelIndex] = useState(0);
-
-  const prevModel = () => {
-    setModelIndex((idx) => (idx - 1 + models.length) % models.length);
-  };
-
-  const nextModel = () => {
-    setModelIndex((idx) => (idx + 1) % models.length);
-  };
+  const containerRef = useRef(null)
+  useLenis()
   
   return (
-    <>
-      <Canvas
-        shadows
-        camera={{ position: [0, 0, 10], fov: 50 }}
-        frameloop={frameloop}
-        gl={useCallback((canvas) => {
-          const renderer = new THREE.WebGPURenderer({
-            canvas,
-            powerPreference: "high-performance",
-            antialias: true,
-            alpha: true,
-            stencil: false,
-          });
-          renderer.init().then(() => setFrameloop("always"));
-          return renderer;
-        }, [])}
+    <div className="relative h-full w-full" ref={containerRef}>
+      <SparkCursor 
+        sparkColor='#fff'
+        sparkSize={10}
+        sparkRadius={15}
+        sparkCount={8}
+        duration={400}
       >
-        <Suspense>
-          <Experience curGeometry={models[modelIndex]} />
-        </Suspense>
-        <PostProcessing />
-      </Canvas>
-      <button
-        onClick={prevModel}
-        style={{
-          position: "fixed",
-          left: 16,
-          top: "50%",
-          transform: "translateY(-50%)",
-          zIndex: 10,
-          width: 48,
-          height: 48,
-          borderRadius: 8,
-          border: "1px solid rgba(255,255,255,0.3)",
-          background: "rgba(0,0,0,0.4)",
-          color: "#fff",
-          cursor: "pointer",
-          fontSize: 20,
-          lineHeight: "48px",
-        }}
-        aria-label="Previous model"
-      >
-        ◀
-      </button>
-      <button
-        onClick={nextModel}
-        style={{
-          position: "fixed",
-          right: 16,
-          top: "50%",
-          transform: "translateY(-50%)",
-          zIndex: 10,
-          width: 48,
-          height: 48,
-          borderRadius: 8,
-          border: "1px solid rgba(255,255,255,0.3)",
-          background: "rgba(0,0,0,0.4)",
-          color: "#fff",
-          cursor: "pointer",
-          fontSize: 20,
-          lineHeight: "48px",
-        }}
-        aria-label="Next model"
-      >
-        ▶
-      </button>
-    </>
+        <Noise />
+        <Crosshair containerRef={containerRef} color='#ffffff'/>
+        <GlobalIcons />
+        <LandingPage />
+        <Details />
+        <LaunchLab />
+        <StackCards />
+      </SparkCursor>
+    </div>
   );
 }
 
