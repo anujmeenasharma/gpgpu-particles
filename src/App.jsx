@@ -23,7 +23,7 @@ function App() {
         duration={400}
       >
         <Noise />
-        <Crosshair containerRef={containerRef} color='#ffffff'/>
+        {/* <Crosshair containerRef={containerRef} color='#ffffff'/> */}
         <GlobalIcons />
         <LandingPage />
         <Details />
