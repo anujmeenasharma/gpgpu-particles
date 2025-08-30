@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import useLenis from "./hooks/useLenis";
 import Noise from "./components/UiComponents/Noise";
-import Crosshair from "./components/UiComponents/CrossHair";
+import Crosshair from "./components/UiComponents/Crosshair";
 import GlobalIcons from "./components/UiComponents/globalIcons";
 import SparkCursor from "./components/UiComponents/SparkCursor";
 import Details from "./components/Pages/Home/Details";
